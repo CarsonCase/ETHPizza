@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1, 
+        "title": "Cheese Pizza", 
+        "type": 0,
+        "price": 10.0, 
+        "imageURL": "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "custom": {
+            "toppings":{
+                "bacon": false,
+                "pineapple": false,
+                "olives": false,
+                "bellPeppers": false,
+                "peperoni": false,
+                "sausage": false,
+                "extraCheese": false
+            },
+        "crust": 0,
+        "size": 0
+        }
+    },
+    {
+        "id": 2, 
+        "title": "Peperoni Pizza", 
+        "type": 0,
+        "price": 11.0, 
+        "imageURL": "https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Q2hlZXNlJTJDJTIwUGVwZXJvbmklMjBhbmQlMjBIYXdhaWlhbiUyMHBpenphfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        "id": 3, 
+        "title": "Hawaiian Pizza", 
+        "type": 0,
+        "price": 14.0, 
+        "imageURL": "https://images.unsplash.com/photo-1562835155-a7c2a225e97d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+    },
+    {
+        "id": 4, 
+        "title": "French Fries", 
+        "type": 1,
+        "price": 8.0, 
+        "imageURL": "https://images.unsplash.com/photo-1630431341636-999a7e047f3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+        "id": 5, 
+        "title": "Chicken Wings", 
+        "type": 1,
+        "price": 10.0, 
+        "imageURL": "https://images.unsplash.com/photo-1608039755401-742074f0548d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hpY2tlbiUyMHdpbmdzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        "id": 6, 
+        "title": "Caesar Salad", 
+        "type": 1,
+        "price": 8.0, 
+        "imageURL": "https://images.unsplash.com/photo-1546793665-c74683f339c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2Flc2FyJTIwc2FsYWR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        "id": 7, 
+        "title": "Pepsi",
+        "type": 2,
+        "price": 2.0, 
+        "imageURL": "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVwc2l8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        "id": 8, 
+        "title": "Sprite", 
+        "type": 2,
+        "price": 2.0, 
+        "imageURL": "https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3ByaXRlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+        "id": 9, 
+        "title": "Coke", 
+        "type": 2,
+        "price": 2.0, 
+        "imageUrl": "https://images.unsplash.com/photo-1554866585-cd94860890b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
+
+    }
+
+]
