@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Link from 'next/link';
+import { FaGithub, FaEnvelope, FaMedium } from 'react-icons/fa';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,19 +12,34 @@ function handleClick() {
 
 export default function Home() {
   return (
-  <div className="min-h-screen bg-gray-100 flex items-center justify-center text-black text-center">
-        <div className="bg-white p-8 rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold mb-6">POS System</h1>
-          <div className="space-y-4">
-            <Link href="/new-order"
-              className="block w-full py-2 px-4 bg-blue-500 text-white text-center font-semibold rounded-lg hover:bg-blue-600">
-                Place a New Order
-            </Link>
-            <Link href="/orderList" className="block w-full py-2 px-4 bg-blue-500 text-white text-center font-semibold rounded-lg hover:bg-blue-600">
-                View List of Orders
-            </Link>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white text-center">
+      <div className="bg-white p-8 rounded-lg shadow-md text-black">
+        <h1 className="text-4xl font-bold mb-6">ETH Pizza POS System</h1>
+        <p className="text-lg mb-6">
+        Hey there, I'm Carson Case, a freelance software developer specializing in web3 projects and always on the lookout for new opportunities. This is my latest project, ETH Pizza, a fictional Pizza Company Ethereum POS system. With features like searchable menu items, promotional rewards tokens, and order tracking, ETH Pizza showcases my expertise in React JS, Solidity smart contracts, and Go backend development. If you're interested in learning more about this project or discussing potential work opportunities, feel free to check out my email, Github, and Medium (which includes a series documenting the development of ETH Pizza). 
+        <br></br>Don't hesitate to reach out and let's chat!"
+        </p>
+        <div className="flex justify-center space-x-4 mb-6">
+          <a href="https://github.com/carsoncase" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700">
+            <FaGithub size={24} />
+          </a>
+          <a href="mailto:carsonpcase@gmail.com" className="text-gray-500 hover:text-gray-700">
+            <FaEnvelope size={24} />
+          </a>
+          <a href="https://medium.com/@carsonpcase" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700">
+            <FaMedium size={24} />
+          </a>
         </div>
-      </div>  
+        <div className="flex justify-center space-x-4">
+          <Link href="/new-order"
+            className="py-3 px-6 bg-purple-500 text-white text-center font-semibold rounded-lg hover:bg-purple-600">
+              New Order
+          </Link>
+          <Link href="/orderList" className="py-3 px-6 bg-blue-500 text-white text-center font-semibold rounded-lg hover:bg-blue-600">
+              Order List
+          </Link>
+        </div>
+      </div>
+    </div>  
   );
 }
