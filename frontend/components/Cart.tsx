@@ -12,6 +12,12 @@ import CloseButton from './CloseButton';
 
 const salesTaxRate: number = parseFloat(process.env.SALES_TAX_RATE || "0");
 
+declare global {
+  interface Window{
+    ethereum?:any
+  }
+}
+
 const Cart: React.FC = () => {
   const { cartItems, clearCart } = useContext(CartContext);
   const { ethPrice } = useEthPrice();

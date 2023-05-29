@@ -2,120 +2,119 @@ package main
 
 import (
 	// "github.com/ethereum/go-ethereum/accounts/abi"
+	"context"
+	"log"
+	"os"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"context"
-    "go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/bson"
 	"github.com/joho/godotenv"
-	"os"
-	"fmt"
-	"log"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type Toppings struct {
-	Bacon        bool `json:"bacon"`
-	Pineapple    bool `json:"pineapple"`
-	Olives bool `json:"olivescript"`
+	Bacon       bool `json:"bacon"`
+	Pineapple   bool `json:"pineapple"`
+	Olives      bool `json:"olivescript"`
 	BellPeppers bool `json:"bellPeppers"`
-	Peperoni     bool `json:"peperoni"`
-	Sausage      bool `json:"sausage"`
-	ExtraCheese  bool `json:"extraCheese"`
-	}
-	
-	type Crust struct {
+	Peperoni    bool `json:"peperoni"`
+	Sausage     bool `json:"sausage"`
+	ExtraCheese bool `json:"extraCheese"`
+}
+
+type Crust struct {
 	Italian    bool `json:"italian"`
 	Classic    bool `json:"classic"`
 	GlutenFree bool `json:"glutenFree"`
 	Drink      bool `json:"drink"`
-	}
-	
-	type Custom struct {
+}
+
+type Custom struct {
 	Toppings Toppings `json:"topings"`
 	Crust    int      `json:"crust"`
 	Size     int      `json:"size"`
-	}
-	
-	type MenuItem struct {
+}
+
+type MenuItem struct {
 	ID       int     `json:"id"`
-	Type	 int	 `json:"type"`
+	Type     int     `json:"type"`
 	Title    string  `json:"title"`
 	Price    float64 `json:"price"`
 	ImageURL string  `json:"imageUrl"`
 	Custom   Custom  `json:"custom"`
-	}
-	
-	
-type OrderPricing struct{
-	PriceUSD float64	`json:"priceUSD"`
-	PriceETH string	`json:"priceETH"`
+}
+
+type OrderPricing struct {
+	PriceUSD float64 `json:"priceUSD"`
+	PriceETH string  `json:"priceETH"`
 }
 
 type Order struct {
-	ID        string        `json:"id"`
-	MenuItems []MenuItem `json:"menuItems"`
-	PriceData OrderPricing	`json: "priceData"`
-	OrderStatus int		`json:"orderStatus"`
-	Maker 		string	`json:"maker"`
+	ID          string       `json:"id"`
+	MenuItems   []MenuItem   `json:"menuItems"`
+	PriceData   OrderPricing `json: "priceData"`
+	OrderStatus int          `json:"orderStatus"`
+	Maker       string       `json:"maker"`
 }
 
 type ContractABI struct {
-	ABI string `json:abi""`
+	ABI     string `json:abi""`
 	Address string `json:"address"`
 }
-	
+
 // func handleEvent(eventData common.Hex){
 // 	address := common.HexToAddress(eventData)
 // 	fmt.Prinln(address)
 // }
 
-func listenEvent(orderCollection *mongo.Collection){
-	client, err := ethclient.Dial("ws://localhost:8545")
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    contractAddress := common.HexToAddress("0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0")
-    query := ethereum.FilterQuery{
-        Addresses: []common.Address{contractAddress},
-		Topics: [][]common.Hash{{common.HexToHash("0x7c6a000d6581009ece38db2bf0a802db87c25d55bdf668f06a962b9c71884773")}},    
+func listenEvent(orderCollection *mongo.Collection) {
+	client, err := ethclient.Dial(os.Getenv("API_STRING"))
+	if err != nil {
+		log.Fatal(err)
 	}
 
-    logs := make(chan types.Log)
-    sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
-    if err != nil {
-        log.Fatal(err)
-    }
+	contractAddress := common.HexToAddress(os.Getenv("CONTRACT_ADDRESS"))
+	query := ethereum.FilterQuery{
+		Addresses: []common.Address{contractAddress},
+		Topics:    [][]common.Hash{{common.HexToHash("0x7c6a000d6581009ece38db2bf0a802db87c25d55bdf668f06a962b9c71884773")}},
+	}
 
-    for {
-        select {
-        case err := <-sub.Err():
-            log.Fatal(err)
-        case vLog := <-logs:
+	logs := make(chan types.Log)
+	sub, err := client.SubscribeFilterLogs(context.Background(), query, logs)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for {
+		select {
+		case err := <-sub.Err():
+			log.Fatal(err)
+		case vLog := <-logs:
 			address := (common.HexToAddress(vLog.Topics[1].Hex()))
 			filter := bson.M{"id": address.Hex()}
-            update := bson.M{"$set": bson.M{"orderStatus": 2}}
-            result, err := orderCollection.UpdateOne(context.Background(), filter, update)
-            if err != nil {
-                log.Fatal(err)
-            }
-            log.Printf("Updated %v order(s)", result.ModifiedCount)        }
-    }
+			update := bson.M{"$set": bson.M{"orderStatus": 2}}
+			result, err := orderCollection.UpdateOne(context.Background(), filter, update)
+			if err != nil {
+				log.Fatal(err)
+			}
+			log.Printf("Updated %v order(s)", result.ModifiedCount)
+		}
+	}
 
 }
-
 
 func main() {
 	err := godotenv.Load()
 
-    if err != nil {
-        panic("Error loading .env file")
-    }
+	if err != nil {
+		panic("Error loading .env file")
+	}
 
 	r := gin.Default()
 
@@ -126,8 +125,7 @@ func main() {
 	config.AllowHeaders = []string{"Origin", "Content-Type"}
 	r.Use(cors.New(config))
 
-	password := os.Getenv("PASSWORD")
-	uri := fmt.Sprintf("mongodb+srv://myLaptop:%s@ethpizzadb.kyeqgav.mongodb.net/?retryWrites=true&w=majority",password)
+	uri := os.Getenv("MONGO_STRING")
 
 	clientOptions := options.Client().ApplyURI(uri)
 	client, err := mongo.Connect(context.Background(), clientOptions)
@@ -138,7 +136,7 @@ func main() {
 	menuCollection := client.Database("data").Collection("menuItems")
 	orderCollection := client.Database("data").Collection("orders")
 
-	go listenEvent(orderCollection)
+	// go listenEvent(orderCollection)
 
 	r.GET("/menuItems", func(c *gin.Context) {
 		var menuItems []MenuItem
@@ -162,8 +160,8 @@ func main() {
 			return
 		}
 		c.JSON(200, menuItems)
-		})
-	
+	})
+
 	r.GET("/orders", func(c *gin.Context) {
 		var orders []Order
 		cursor, err := orderCollection.Find(context.Background(), bson.M{})
@@ -222,6 +220,6 @@ func main() {
 		log.Printf("Inserted order with ID %v", result.UpsertedID)
 		c.Status(201)
 	})
-		
+
 	r.Run(":8080")
 }

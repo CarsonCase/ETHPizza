@@ -3,20 +3,20 @@ import { MenuItem } from "../../interfaces/MenuItem"
 import { Order } from "../../interfaces/Order"
 
   export async function getMenuItems(): Promise<MenuItem[]> {
-    const response = await fetch("http://localhost:8080/menuItems");
+    const response = await fetch(process.env.BACKEND_ENDPOINT+"/menuItems");
     const data: MenuItem[] = await response.json();
     return data;
   }
 
   export async function getOrdersList(): Promise<Order[]> {
-    const response = await fetch("http://localhost:8080/orders");
+    const response = await fetch(process.env.BACKEND_ENDPOINT+"/orders");
     const data: Order[] = await response.json();
     return data;
   }
 
   export async function updateOrder(order: Order){
     try {
-      const response = await fetch('http://localhost:8080/updateOrder', {
+      const response = await fetch(process.env.BACKEND_ENDPOINT+'updateOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ import { Order } from "../../interfaces/Order"
 
   export async function postOrder(order: Order){
     try {
-      const response = await fetch('http://localhost:8080/orders', {
+      const response = await fetch(process.env.BACKEND_ENDPOINT+'/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

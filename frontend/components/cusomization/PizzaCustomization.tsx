@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuItem, Size } from '../../interfaces/MenuItem';
+import { MenuItem, Size , Crust} from '../../interfaces/MenuItem';
 
 interface MenuItemCustomizationProps {
   item: MenuItem;
@@ -29,17 +29,17 @@ const MenuItemCustomization: React.FC<MenuItemCustomizationProps> = ({
     const { value } = event.target;
     setCustom((prevCustom) => ({
       ...prevCustom,
-      size: value as Size,
+      size: value as unknown as Size,
     }));
   };
 
   const handleCrustChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { value } = event.target;
     setCustom((prevCrust) => ({
       ...prevCrust,
-      crust: value as Crust,
+      crust: value as unknown as Crust,
     }));
   };
 

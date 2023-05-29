@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { PropsWithChildren } from 'react';
 
 interface EthPriceContextValue {
   ethPrice: number | null;
@@ -16,7 +17,7 @@ interface CoingeckoApiResponse {
   };
 }
 
-export const EthPriceProvider: React.FC = ({ children }) => {
+export const EthPriceProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [ethPrice, setEthPrice] = useState<number | null>(null);
 
   useEffect(() => {
