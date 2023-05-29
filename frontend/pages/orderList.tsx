@@ -47,7 +47,7 @@ const OrdersPage: React.FC = () => {
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Order Date
+                        Order Price (ETH)
                       </th>
                       <th
                         scope="col"
@@ -70,13 +70,12 @@ const OrdersPage: React.FC = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm font-medium text-gray-900">
                             {order.id}
-                            ID
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-500">
                             {/* {new Date(order.date).toLocaleDateString()} */}
-                            DATE
+                            {order.priceData.priceETH}
                           </div>
                         </td>
                         <div className={`${getOrderStatusColor(order.orderStatus)}`}>

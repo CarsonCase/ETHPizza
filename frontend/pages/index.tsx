@@ -16,8 +16,8 @@ export default function Home() {
       <div className="bg-white p-8 rounded-lg shadow-md text-black">
         <h1 className="text-4xl font-bold mb-6">ETH Pizza POS System</h1>
         <p className="text-lg mb-6">
-        Hey there, I'm Carson Case, a freelance software developer specializing in web3 projects and always on the lookout for new opportunities. This is my latest project, ETH Pizza, a fictional Pizza Company Ethereum POS system. With features like searchable menu items, promotional rewards tokens, and order tracking, ETH Pizza showcases my expertise in React JS, Solidity smart contracts, and Go backend development. If you're interested in learning more about this project or discussing potential work opportunities, feel free to check out my email, Github, and Medium (which includes a series documenting the development of ETH Pizza). 
-        <br></br>Don't hesitate to reach out and let's chat!"
+        Hey there, I'm Carson Case, a freelance software developer specializing in web3 projects and always on the lookout for new opportunities. This is my latest project, ETH Pizza, a fictional Pizza Company Ethereum POS system. With features like searchable menu items, promotional rewards tokens, and order tracking. <br></br>
+        <hr />My expertise is in Solidity Smart Contract development, but ETH Pizza also shows I'm capable with Frontend (React) and Backend (GoLang), and more importantly demonstrates my understanding of the software development process, and basic project management. If you're interested in learning more about this project, the process of it's development was documented on Medium, the link to which you can find below along with my contact information. Don't hesitate to send a quick email with your preferred contact information!
         </p>
         <div className="flex justify-center space-x-4 mb-6">
           <a href="https://github.com/carsoncase" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700">
