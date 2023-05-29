@@ -9,14 +9,16 @@ import SalesDataButton from '@/components/SalesDataButton';
 const OrdersPage: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
 
+    // every 3 seconds after refresh
     useEffect(() => {
       const fetchOrders = async () => {
         const data = await getOrdersList();
-        console.log("TESTING")
-        console.log(data)
         setOrders(data);
       };
-  
+      
+      //on load first call fetchOrders
+      fetchOrders();
+      
       // Call fetchOrders every 3 seconds
       const intervalId = setInterval(fetchOrders, 3000);
   
@@ -75,7 +77,7 @@ const OrdersPage: React.FC = () => {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-500">
                             {/* {new Date(order.date).toLocaleDateString()} */}
-                            {order.priceData.priceETH}
+                            {order.PriceData.priceETH}
                           </div>
                         </td>
                         <div className={`${getOrderStatusColor(order.orderStatus)}`}>
