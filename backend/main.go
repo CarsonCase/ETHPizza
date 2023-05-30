@@ -136,7 +136,7 @@ func main() {
 	menuCollection := client.Database("data").Collection("menuItems")
 	orderCollection := client.Database("data").Collection("orders")
 
-	// go listenEvent(orderCollection)
+	go listenEvent(orderCollection)
 
 	r.GET("/menuItems", func(c *gin.Context) {
 		var menuItems []MenuItem
