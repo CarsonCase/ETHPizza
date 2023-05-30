@@ -1,30 +1,43 @@
 # ETH Pizza
 
+[NOW LIVE](https://ethpizza.biz)
+
+
 ETH Pizza is a POS SaaS product for a fictional pizza restaurant built using blockchain technology. It is designed to handle payments, store payment data, manage rewards points and gift cards, and provide interfaces for employees and users.
 
 ## Purpose
 
-The purpose of this project is to showcase how blockchain can be integrated into small businesses and provide real value. It will also demonstrate the developer's wide knowledge of software development, as it will contain everything from project management to backend services to smart contracts.
+The purpose of this project is to showcase how blockchain can be integrated into small businesses and provide real value. It will also demonstrate my wide knowledge of software development, as it will contain everything from project management to backend services to smart contracts.
 
 ## Technologies Used
 
 - Ethereum blockchain
 - Solidity smart contracts
-- React.js frontend
-- Node.js backend
-- AI tools for planning and development
+- Next js frontend using typescript, react and Tailwind css
+- GoLang backend
+- openAI tools for planning and development help
 
 ## Installation
 
 To install and run the ETH Pizza project, follow these steps:
 
 1. Clone the repository to your local machine.
-2. Create a .env in each of the directories (there is an ex.env in each) and populate the values. You will need a MongoDB database for the backend.
-3. Install the necessary dependencies in /frontend using `npm install`.
-4. Start the /backend server using `go run main.go`.
-5. Start the frontend server using `npm run dev`.
-6. In the /smart-contracts directory run `npx hardhat node &` to start a local node.
-7. Deploy smart contracts with `npx hardhat deploy --network local`
+2. Create a .env in each of the directories (there is an ex.env in each) and populate api key values.
+    - Next steps will explain how to get the mongoDB and contract address values for /backend/.env
+    - Default backend server used by the frontend is the live version on ethpizza.biz, if you want to use your own as done below, replace the endpoint value in /frontend/.env with localhost:8080
+    - The private key in smart-contracts/.env will be the only wallet that can create new orders. Anyone however, can pay.
+
+3. Create a MongoDB instance for your database. You will need to paste the connection URI into the backend .env file
+    - You will need to create a Database named "data" with 2 collections named "orders" and "menuItems"
+    - Menu items will need to be added to the database. You can copy the ones I use [here](https://ethpizza.biz/backend/menuItems) or add your own according to the same schema.
+4. Install the necessary dependencies in /frontend and /smart-contracts using `npm install`.
+5. Start the /backend server using `go run main.go`.
+6. Start the frontend server using `npm run dev`.
+7. In the /smart-contracts directory run `npx hardhat node` to start a local node.
+8. Deploy smart contracts with `npx hardhat deploy --network local` you will be returned with a contract address
+9. Populate that address in the /backend .env
+10. In parent directory run `cp /smart-contracts/deployments/local/Router.json /frontend/public/` to copy the Router deployment file to the frontend
+11. Visit localhost:8080 to see the site!
 
 ## Project Objectives
 

@@ -48,7 +48,7 @@ const CheckoutButton: React.FC = () => {
         // Find the OrderCreated event in the transaction receipt
         
         // after successful call push order to DB
-        const paymentAddress_ = coder.decode([ "address" ], receipt.logs[0].topics[1])[0];
+        const paymentAddress_ = coder.decode([ "address" ], (receipt as any).logs[0].topics[1])[0];
         console.log("payment address: ", paymentAddress_);
 
         const price: OrderPricing = {
