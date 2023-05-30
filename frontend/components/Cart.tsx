@@ -22,6 +22,8 @@ const Cart: React.FC = () => {
   const { cartItems, clearCart } = useContext(CartContext);
   const { ethPrice } = useEthPrice();
   const [paymentAddress, setPaymentAddress] = useState<string | null>(null);
+  const [paymentAmount, setPaymentAmount] = useState<string | null>(null)
+
   const [discount, setDiscount] = useState<number>(0);
 
   const handleCheckout = async () => {
@@ -49,7 +51,8 @@ const Cart: React.FC = () => {
 
         // Call the smart contract function
         const tx = await contract.newOrder(ethers.parseUnits(ethPrice_));
-
+        
+        setPaymentAmount(ethPrice_);
         // Wait for the transaction to be mined
         const receipt = await tx.wait();
 
@@ -158,6 +161,7 @@ const Cart: React.FC = () => {
           <div className="bg-white p-4 rounded-md shadow-md relative p-5">
             {/* <button className="text-center text-gray-500 mt-2" onClick={handleClose}> X </button> */}
             <CloseButton onClick={handleClose}/>
+            {paymentAmount}
             <QRCode value={`ethereum:${paymentAddress}`} />
             <p className="text-center text-gray-500 mt-2">Scan to pay</p>
           </div>
