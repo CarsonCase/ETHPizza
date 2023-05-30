@@ -18,6 +18,10 @@
 # misc
 .DS_Store
 *.pem
+.env
+
+# don't incldue Router.json
+Router.json
 
 # debug
 npm-debug.log*

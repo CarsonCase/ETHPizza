@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ethers } from 'ethers';
 import { CartContext } from '../contexts/CartContext';
 import CartItemCard from './CartItem';
-import Router from "../public/Router.json";
+import Router from "../Router.json";
 import { Order, Status } from '@/interfaces/Order';
 import { getMenuItems, postOrder } from "../pages/api/api";
 import { OrderPricing } from "@/interfaces/OrderPricing";
@@ -36,7 +36,6 @@ const Cart: React.FC = () => {
             ethers.parseUnits((ethPrice as any).toString())
           )
         );
-        console.log(ethPrice_);
 
         // Request account access
         const provider = new ethers.BrowserProvider(window.ethereum)

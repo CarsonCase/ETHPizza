@@ -4,7 +4,7 @@ import { Order, Status } from "@/interfaces/Order";
 import { OrderPricing } from "@/interfaces/OrderPricing";
 
 import {ethers} from "ethers";
-import Router from "../public/Router.json";
+import Router from "../Router.json";
 import { getOrderRefundable } from "@/utils/orderStatus";
 
 interface RefundButtonProps {
