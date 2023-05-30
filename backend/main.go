@@ -38,7 +38,7 @@ type Crust struct {
 type Custom struct {
 	Toppings Toppings `json:"topings"`
 	Crust    int      `json:"crust"`
-	Size     int      `json:"size"`
+	Size     int      `json:"size,string"`
 }
 
 type MenuItem struct {

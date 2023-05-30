@@ -36,7 +36,7 @@ To install and run the ETH Pizza project, follow these steps:
 7. In the /smart-contracts directory run `npx hardhat node` to start a local node.
 8. Deploy smart contracts with `npx hardhat deploy --network local` you will be returned with a contract address
 9. Populate that address in the /backend .env
-10. In parent directory run `cp /smart-contracts/deployments/local/Router.json /frontend/public/` to copy the Router deployment file to the frontend
+10. In parent directory run `cp /smart-contracts/deployments/local/Router.json /frontend` to copy the Router deployment file to the frontend
 11. Visit localhost:8080 to see the site!
 
 ## Project Objectives
